@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Display File</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f57c00; /* Vibrant orange */
+            color: #fff;
+        }
+        .summary td {
+            background-color: #f8d7da; /* Highlight missing fields in red */
+        }
+        button {
+            background-color: #f57c00; /* Vibrant orange */
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #e64a19; /* Darker orange on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>File Content</h1>
+    <form method="post" action="{{ url_for('send_emails', filename=request.path.split('/')[-1]) }}">
+        <button type="submit">Send Emails</button>
+    </form>
+    <form method="post" action="{{ url_for('generate_payment_urls', filename=request.path.split('/')[-1]) }}">
+        <button type="submit">Generate Payment URLs</button>
+    </form>
+    <form method="get" action="{{ url_for('upload_file') }}">
+        <button type="submit">Re-upload</button>
+    </form>
+
+    <h2>Data Table</h2>
+    {{ tables[0]|safe }}
+
+    {% if tables[1] %}
+        <h2>Missing Fields Summary</h2>
+        {{ tables[1]|safe }}
+    {% endif %}
+</body>
+</html>
+

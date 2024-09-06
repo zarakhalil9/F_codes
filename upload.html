@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Upload File</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f7f7f7;
+            color: #333;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .btn-primary {
+            background-color: #ff6f00; /* Bright orange */
+            border-color: #ff6f00;
+        }
+        .btn-primary:hover {
+            background-color: #e65c00;
+            border-color: #e65c00;
+        }
+        .alert {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Upload an Excel File</h1>
+        <form method="post" enctype="multipart/form-data" class="mt-4">
+            <div class="form-group">
+                <input type="file" name="file" class="form-control-file" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload and Send Emails</button>
+        </form>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="alert mt-4" role="alert">
+                    <ul>
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

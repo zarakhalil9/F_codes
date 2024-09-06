@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Excel File</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;    
+        }
+        form {
+            margin: 20px 0;
+        }
+        input[type="file"], input[type="datetime-local"] {
+            margin-right: 10px;
+        }
+        button {
+            background-color: #f57c00; /* Vibrant orange */
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #e64a19; /* Darker orange on hover */
+        }
+        .flash {
+            margin-top: 20px;
+        }
+        .flash.error {
+            color: #d32f2f; /* Red color for errors */
+        }
+        .flash.success {
+            color: #388e3c; /* Green color for success */
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload Excel File</h1>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".xlsx" required>
+        <input type="datetime-local" name="schedule">
+        <button type="submit">Upload</button>
+    </form>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash">
+                <ul>
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>
